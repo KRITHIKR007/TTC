@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>AI in Cybersecurity: Defending the Digital Frontier | The Turing Club</title>
+   
+   <!-- Favicon -->
+   <link rel="icon" href="../assets/logo.png" type="image/png">
+  
+   <!-- Stylesheets -->
+   <script src="https://cdn.tailwindcss.com"></script>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+   <!-- Custom Styles -->
+   <link rel="stylesheet" href="../style.css">
+   <style>
+       /* Event-specific styles */
+       .event-banner {
+           height: 50vh;
+           background-image: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.9)), 
+                             url('https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');
+           background-size: cover;
+           background-position: center;
+           position: relative;
+       }
+       
+       .countdown-timer {
+           background: rgba(17, 17, 17, 0.8);
+           backdrop-filter: blur(10px);
+       }
+
+       .speaker-card img {
+           filter: grayscale(20%);
+           transition: all 0.4s ease;
+       }
+       
+       .speaker-card:hover img {
+           filter: grayscale(0%);
+       }
+
+       .register-button {
+           position: relative;
+           overflow: hidden;
+           z-index: 1;
+       }
+
+       .register-button::before {
+           content: '';
+           position: absolute;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           background: linear-gradient(45deg, #2563eb, #4f46e5, #7c3aed);
+           background-size: 200% 200%;
+           animation: gradientMove 5s ease infinite;
+           z-index: -1;
+       }
+   </style>
+</head>
+
+<body class="text-white bg-[#090909] antialiased">
+   <!-- 1. Header/Navigation -->
+   <nav class="fixed w-full z-50 bg-[#090909]/90 backdrop-blur-sm border-b border-white/5">
+       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div class="flex items-center justify-between h-16">
+               <!-- Logo -->
+               <a href="../index.html" class="flex items-center space-x-3">
+                   <img src="../assets/logo.png" alt="TTC Logo" class="h-8 w-auto">
+                   <span class="text-xl font-bold text-white">TTC</span>
+               </a>
+
+               <!-- Desktop Navigation -->
+               <div class="hidden md:flex items-center space-x-8">
+                   <a href="../index.html#about" class="text-sm text-gray-300 hover:text-white transition-colors">About</a>
+                   <a href="../index.html#events" class="text-sm text-gray-300 hover:text-white transition-colors">Events</a>
+                   <a href="../index.html#team" class="text-sm text-gray-300 hover:text-white transition-colors">Team</a>
+                   <a href="../index.html#projects" class="text-sm text-gray-300 hover:text-white transition-colors">Projects</a>
+                   <a href="#register" class="px-4 py-2 text-sm rounded-lg btn-primary">
+                       Register Now
+                   </a>
+               </div>
+
+               <!-- Mobile Menu Button -->
+               <button class="md:hidden text-white" id="mobileMenuBtn">
+                   <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-16 6h16"/>
+                   </svg>
+               </button>
+           </div>
+       </div>
+   </nav>
+
+   <!-- Mobile Menu -->
+   <div id="mobileMenu" class="md:hidden fixed inset-0 bg-black/90 backdrop-blur-sm z-40 transform transition-transform duration-300 translate-y-full">
+       <div class="flex flex-col items-center justify-center h-full space-y-8">
+           <div class="flex items-center space-x-3 mb-6">
+               <img src="../assets/logo.png" alt="TTC Logo" class="h-10 w-auto">
+               <span class="text-2xl font-bold text-white">TTC</span>
+           </div>
+           <a href="../index.html#about" class="text-lg text-gray-300 hover:text-white transition-colors">About</a>
+           <a href="../index.html#events" class="text-lg text-gray-300 hover:text-white transition-colors">Events</a>
+           <a href="../index.html#team" class="text-lg text-gray-300 hover:text-white transition-colors">Team</a>
+           <a href="../index.html#projects" class="text-lg text-gray-300 hover:text-white transition-colors">Projects</a>
+           <a href="#register" class="px-6 py-2 text-lg rounded-lg btn-primary">Register Now</a>
+       </div>
+   </div>
+
+   <!-- 2. Event Banner -->
+   <section class="event-banner flex items-center justify-center">
+       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+           <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-500/30 text-blue-400 mb-4">
+               <i class="fas fa-calendar-alt mr-2"></i> April 29, 2025
+           </span>
+           <h1 class="text-4xl md:text-6xl font-bold mb-4" data-aos="fade-up">
+               AI in Cybersecurity:<br>
+               <span class="bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text">
+                   Defending the Digital Frontier
+               </span>
+           </h1>
+           <p class="text-gray-400 text-xl max-w-3xl mx-auto mb-8" data-aos="fade-up" data-aos-delay="100">
+               Explore how Artificial Intelligence is transforming the landscape of cybersecurity
+           </p>
+           <div class="flex flex-wrap gap-6 justify-center" data-aos="fade-up" data-aos-delay="200">
+               <a href="#register" class="px-8 py-3 rounded-lg register-button text-white font-medium">
+                   Register Now
+               </a>
+               <a href="#details" class="px-8 py-3 rounded-lg btn-secondary">
+                   Learn More
+               </a>
+           </div>
+       </div>
+   </section>
+
+   <!-- 3. Countdown Timer -->
+   <div class="countdown-timer py-6 border-y border-white/5">
+       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div class="flex flex-wrap justify-center md:justify-between items-center">
+               <div class="flex items-center text-gray-400 mb-4 md:mb-0">
+                   <i class="fas fa-map-marker-alt text-blue-500 mr-2"></i>
+                   <span>Seminar Hall 002, Jain University</span>
+               </div>
+               <div class="flex items-center text-gray-400 mb-4 md:mb-0 mx-6">
+                   <i class="far fa-clock text-blue-500 mr-2"></i>
+                   <span>9:00 AM - 11:00 AM</span>
+               </div>
+               <div class="countdown flex space-x-4">
+                   <div class="text-center">
+                       <div id="days" class="text-2xl font-bold text-white">00</div>
+                       <div class="text-xs text-gray-400">Days</div>
+                   </div>
+                   <div class="text-center">
+                       <div id="hours" class="text-2xl font-bold text-white">00</div>
+                       <div class="text-xs text-gray-400">Hours</div>
+                   </div>
+                   <div class="text-center">
+                       <div id="minutes" class="text-2xl font-bold text-white">00</div>
+                       <div class="text-xs text-gray-400">Minutes</div>
+                   </div>
+                   <div class="text-center">
+                       <div id="seconds" class="text-2xl font-bold text-white">00</div>
+                       <div class="text-xs text-gray-400">Seconds</div>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </div>
+
+   <!-- 4. Event Details -->
+   <section id="details" class="py-24 relative bg-[#0a0a0a]">
+       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div class="grid md:grid-cols-2 gap-12 items-start">
+               <!-- Event Description -->
+               <div class="space-y-8">
+                   <div>
+                       <h2 class="text-3xl font-bold mb-6">About the Event</h2>
+                       <p class="text-gray-400 leading-relaxed">
+                           In an era where data breaches and cyber threats are escalating, Artificial Intelligence 
+                           is stepping up as a powerful ally in digital defense. This session dives deep into how 
+                           AI is transforming cybersecurity—from detecting threats in real-time to automating 
+                           responses and safeguarding critical systems.
+                       </p>
+                       <p class="text-gray-400 leading-relaxed mt-4">
+                           Join us for a thought-provoking event that blends technology, innovation, and 
+                           real-world impact. Whether you're a beginner or already dabbling in AI or 
+                           cybersecurity, this session is crafted to ignite your curiosity and expand your 
+                           understanding.
+                       </p>
+                   </div>
+
+                   <div>
+                       <h3 class="text-2xl font-bold mb-4">What You'll Learn</h3>
+                       <ul class="space-y-3 text-gray-400">
+                           <li class="flex items-start">
+                               <i class="fas fa-check-circle text-blue-500 mr-3 mt-1"></i>
+                               <span>The current landscape of cybersecurity threats</span>
+                           </li>
+                           <li class="flex items-start">
+                               <i class="fas fa-check-circle text-blue-500 mr-3 mt-1"></i>
+                               <span>How AI is used to predict, detect, and neutralize attacks</span>
+                           </li>
+                           <li class="flex items-start">
+                               <i class="fas fa-check-circle text-blue-500 mr-3 mt-1"></i>
+                               <span>Cutting-edge tools, techniques, and use cases</span>
+                           </li>
+                           <li class="flex items-start">
+                               <i class="fas fa-check-circle text-blue-500 mr-3 mt-1"></i>
+                               <span>Ethical considerations and future challenges</span>
+                           </li>
+                           <li class="flex items-start">
+                               <i class="fas fa-check-circle text-blue-500 mr-3 mt-1"></i>
+                               <span>Career paths in AI-driven cybersecurity</span>
+                           </li>
+                       </ul>
+                   </div>
+
+                   <div>
+                       <h3 class="text-2xl font-bold mb-4">Who Should Attend?</h3>
+                       <div class="flex flex-wrap gap-2">
+                           <span class="px-3 py-1 rounded-full bg-blue-500/10 text-blue-400">AI/ML enthusiasts</span>
+                           <span class="px-3 py-1 rounded-full bg-red-500/10 text-red-400">Cybersecurity beginners and experts</span>
+                           <span class="px-3 py-1 rounded-full bg-green-500/10 text-green-400">Students looking for a future in tech</span>
+                           <span class="px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-400">Anyone curious about digital safety</span>
+                       </div>
+                   </div>
+               </div>
+
+               <!-- Speaker Info -->
+               <div class="glass-card p-8 rounded-xl">
+                   <div class="speaker-card">
+                       <div class="text-center mb-6">
+                           <h2 class="text-3xl font-bold mb-2">Guest Speaker</h2>
+                           <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+                       </div>
+                       
+                       <div class="text-center mb-6">
+                           <img src="../assets/speaker.jpeg" alt="Rashtra SHOURYA" class="w-40 h-40 object-cover rounded-full mx-auto mb-4">
+                           <h3 class="text-2xl font-bold mb-1">Rashtra SHOURYA</h3>
+                           <p class="text-blue-400">Post Lead – InfoSec | BISO – GIT, Groww</p>
+                       </div>
+                       
+                       <p class="text-gray-400 text-center mb-6">
+                           Rashtra brings a wealth of experience from one of India's leading fintech platforms, combining 
+                           deep cybersecurity insight with AI-driven solutions. Gain firsthand perspectives from someone 
+                           leading InfoSec operations in a fast-paced, tech-first environment.
+                       </p>
+                       
+                       <div class="flex justify-center space-x-4">
+                           <a href="https://www.linkedin.com/in/rashtra-shourya%E2%84%A2-%F0%9F%96%A5%EF%B8%8F-406a7658?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-400 hover:bg-blue-500/20 transition-all">
+                               <i class="fab fa-linkedin-in"></i>
+                           </a>
+                          
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </section>
+
+   <!-- 5. Event Agenda -->
+   <section class="py-24 relative bg-[#090909]">
+       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div class="text-center mb-16">
+               <h2 class="text-3xl font-bold mb-4">Event Agenda</h2>
+               <p class="text-gray-400 max-w-2xl mx-auto">
+                   Schedule for the AI in Cybersecurity event
+               </p>
+           </div>
+
+           <div class="max-w-4xl mx-auto">
+               <div class="space-y-8">
+                   <!-- Agenda Item 1 -->
+                   <div class="glass-card p-6 rounded-xl">
+                       <div class="flex flex-wrap md:flex-nowrap items-start">
+                           <div class="min-w-[100px] mb-4 md:mb-0 mr-6">
+                               <div class="text-xl font-bold text-blue-500">9:00 AM</div>
+                               <div class="text-sm text-gray-400">30 min</div>
+                           </div>
+                           <div>
+                               <h3 class="text-xl font-bold mb-2">Registration & Networking</h3>
+                               <p class="text-gray-400">
+                                   Check-in, receive event materials, and connect with fellow attendees over coffee and refreshments.
+                               </p>
+                           </div>
+                       </div>
+                   </div>
+
+                   <!-- Agenda Item 2 -->
+                   <div class="glass-card p-6 rounded-xl relative overflow-hidden border-blue-500/30 border">
+                       <div class="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
+                       <div class="flex flex-wrap md:flex-nowrap items-start">
+                           <div class="min-w-[100px] mb-4 md:mb-0 mr-6">
+                               <div class="text-xl font-bold text-blue-500">9:30 AM</div>
+                               <div class="text-sm text-gray-400">45 min</div>
+                           </div>
+                           <div>
+                               <h3 class="text-xl font-bold mb-2">Keynote: AI in Cybersecurity</h3>
+                               <p class="text-gray-400">
+                                   Presentation by Rashtra SHOURYA on how AI is revolutionizing cybersecurity, with real-world examples and case studies.
+                               </p>
+                           </div>
+                       </div>
+                   </div>
+
+                   <!-- Agenda Item 3 -->
+                   <div class="glass-card p-6 rounded-xl">
+                       <div class="flex flex-wrap md:flex-nowrap items-start">
+                           <div class="min-w-[100px] mb-4 md:mb-0 mr-6">
+                               <div class="text-xl font-bold text-blue-500">10:15 AM</div>
+                               <div class="text-sm text-gray-400">30 min</div>
+                           </div>
+                           <div>
+                               <h3 class="text-xl font-bold mb-2">Interactive Demo & Discussion</h3>
+                               <p class="text-gray-400">
+                                   Live demonstration of AI-powered cybersecurity tools, followed by Q&A session with the audience.
+                               </p>
+                           </div>
+                       </div>
+                   </div>
+
+                   <!-- Agenda Item 4 -->
+                   <div class="glass-card p-6 rounded-xl">
+                       <div class="flex flex-wrap md:flex-nowrap items-start">
+                           <div class="min-w-[100px] mb-4 md:mb-0 mr-6">
+                               <div class="text-xl font-bold text-blue-500">10:45 AM</div>
+                               <div class="text-sm text-gray-400">15 min</div>
+                           </div>
+                           <div>
+                               <h3 class="text-xl font-bold mb-2">Closing Remarks & Networking</h3>
+                               <p class="text-gray-400">
+                                   Final thoughts, resource sharing, and opportunity to connect with the speaker and other participants.
+                               </p>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </section>
+
+   <!-- 6. Registration Form -->
+   <section id="register" class="py-24 relative bg-[#0a0a0a]">
+       <div class="max-w-4xl mx-auto px-4">
+           <div class="text-center mb-16">
+               <h2 class="text-3xl font-bold mb-4">Register for the Event</h2>
+               <p class="text-gray-400 max-w-2xl mx-auto">
+                   Limited seats available! Fill out the form below to secure your spot.
+               </p>
+           </div>
+
+           <div class="glass-card p-8 md:p-12 rounded-2xl">
+               <div class="aspect-w-16 aspect-h-9">
+                   <!-- Replace this with your actual Google Forms embed code -->
+                   <iframe src="https://forms.gle/5wgrRxviha4zJWZT8" 
+                           width="100%" 
+                           height="800" 
+                           frameborder="0" 
+                           marginheight="0" 
+                           marginwidth="0">
+                       Loading…
+                   </iframe>
+               </div>
+           </div>
+       </div>
+   </section>
+
+   <!-- 7. Footer -->
+   <footer class="py-12 bg-[#080808] border-t border-white/5">
+       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div class="flex flex-col md:flex-row justify-between items-center">
+               <!-- Logo and Copyright -->
+               <div class="flex items-center mb-6 md:mb-0">
+                   <img src="../assets/logo.png" alt="TTC Logo" class="h-10 w-auto mr-3">
+                   <div>
+                       <div class="text-xl font-bold">The Turing Club</div>
+                       <div class="text-sm text-gray-400">© 2025 All Rights Reserved</div>
+                   </div>
+               </div>
+               
+               <!-- Social Links -->
+               <div class="flex space-x-4">
+                   <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-all">
+                       <i class="fab fa-instagram text-gray-400 hover:text-white"></i>
+                   </a>
+                   <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-all">
+                       <i class="fab fa-linkedin-in text-gray-400 hover:text-white"></i>
+                   </a>
+                   <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-all">
+                       <i class="fab fa-twitter text-gray-400 hover:text-white"></i>
+                   </a>
+               </div>
+           </div>
+       </div>
+   </footer>
+
+   <!-- Back to top button -->
+   <button id="backToTop" class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-blue-500/80 text-white flex items-center justify-center opacity-0 transition-all shadow-lg">
+       <i class="fas fa-arrow-up"></i>
+   </button>
+
+   <script>
+       document.addEventListener('DOMContentLoaded', () => {
+           // Initialize AOS
+           AOS.init({
+               duration: 800,
+               once: true,
+               offset: 100
+           });
+
+           // Mobile menu toggle
+           const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+           const mobileMenu = document.getElementById('mobileMenu');
+           
+           mobileMenuBtn.addEventListener('click', () => {
+               mobileMenu.classList.toggle('translate-y-full');
+           });
+
+           // Back to top button
+           const backToTopButton = document.getElementById('backToTop');
+           
+           window.addEventListener('scroll', () => {
+               backToTopButton.style.opacity = window.scrollY > 500 ? '1' : '0';
+           });
+
+           backToTopButton.addEventListener('click', () => {
+               window.scrollTo({ top: 0, behavior: 'smooth' });
+           });
+
+           // Countdown Timer
+           const eventDate = new Date('April 29, 2025 09:00:00').getTime();
+           
+           function updateCountdown() {
+               const now = new Date().getTime();
+               const distance = eventDate - now;
+               
+               const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+               const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+               const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+               const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+               
+               document.getElementById('days').innerText = days.toString().padStart(2, '0');
+               document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
+               document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
+               document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
+               
+               if (distance < 0) {
+                   clearInterval(countdownTimer);
+                   document.getElementById('days').innerText = '00';
+                   document.getElementById('hours').innerText = '00';
+                   document.getElementById('minutes').innerText = '00';
+                   document.getElementById('seconds').innerText = '00';
+               }
+           }
+           
+           updateCountdown(); // Run once immediately
+           const countdownTimer = setInterval(updateCountdown, 1000);
+
+           // Smooth scroll for anchor links
+           document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+               anchor.addEventListener('click', function(e) {
+                   e.preventDefault();
+                   const target = document.querySelector(this.getAttribute('href'));
+                   if (target) {
+                       // If mobile menu is open, close it
+                       if (!mobileMenu.classList.contains('translate-y-full')) {
+                           mobileMenu.classList.add('translate-y-full');
+                       }
+                       
+                       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                   }
+               });
+           });
+       });
+   </script>
+</body>
+</html>
