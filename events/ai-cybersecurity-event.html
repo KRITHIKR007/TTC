@@ -509,37 +509,48 @@
                window.scrollTo({ top: 0, behavior: 'smooth' });
            });
 
-           // Fixed Countdown Timer - Using direct DOM manipulation
+           // FIXED Countdown Timer - Making it more robust
+           const daysElement = document.getElementById('days');
+           const hoursElement = document.getElementById('hours');
+           const minutesElement = document.getElementById('minutes');
+           const secondsElement = document.getElementById('seconds');
+           
            function updateCountdown() {
+               // Debug: Set event date to tomorrow - April 29, 2025
                const eventDate = new Date('April 29, 2025 09:00:00').getTime();
                const now = new Date().getTime();
                const distance = eventDate - now;
                
+               // Time calculations
                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
                
-               // Using textContent for better performance and reliability
-               document.getElementById('days').textContent = days.toString().padStart(2, '0');
-               document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-               document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-               document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-               
-               if (distance < 0) {
-                   clearInterval(countdownTimer);
-                   document.getElementById('days').textContent = '00';
-                   document.getElementById('hours').textContent = '00';
-                   document.getElementById('minutes').textContent = '00';
-                   document.getElementById('seconds').textContent = '00';
+               // Safety check: Ensure elements exist before updating
+               if (daysElement && hoursElement && minutesElement && secondsElement) {
+                   // Format with leading zeros
+                   daysElement.textContent = days.toString().padStart(2, '0');
+                   hoursElement.textContent = hours.toString().padStart(2, '0');
+                   minutesElement.textContent = minutes.toString().padStart(2, '0');
+                   secondsElement.textContent = seconds.toString().padStart(2, '0');
+                   
+                   // Handle expired timer
+                   if (distance < 0) {
+                       clearInterval(countdownInterval);
+                       daysElement.textContent = '00';
+                       hoursElement.textContent = '00';
+                       minutesElement.textContent = '00';
+                       secondsElement.textContent = '00';
+                   }
                }
            }
            
            // Run countdown immediately once
            updateCountdown();
            
-           // Then update every second
-           const countdownTimer = setInterval(updateCountdown, 1000);
+           // Then update every second - use a consistent variable name
+           const countdownInterval = setInterval(updateCountdown, 1000);
 
            // Smooth scroll for anchor links
            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
