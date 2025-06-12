@@ -216,9 +216,7 @@
            0% { opacity: 0.6; }
            50% { opacity: 0.8; }
            100% { opacity: 0.6; }
-       }
-
-       /* Smooth transition for back to top button */
+       }       /* Smooth transition for back to top button */
        #backToTop {
            transition: opacity 0.3s, transform 0.3s;
        }
@@ -231,88 +229,11 @@
        .newsletter-input:focus {
            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
        }
-
-       /* Notification bar styles */
-       .notification-bar {
-           background: linear-gradient(90deg, #2563eb, #4f46e5, #7c3aed, #4f46e5, #2563eb);
-           background-size: 200% 100%;
-           animation: gradientSlide 3s linear infinite;
-           height: 40px;
-           display: flex;
-           align-items: center;
-           overflow: hidden;
-           position: relative;
-           border-bottom: 1px solid rgba(255,255,255,0.1);
-       }
-       
-       .notification-text {
-           white-space: nowrap;
-           animation: scrollText 20s linear infinite;
-           font-weight: 500;
-           display: flex;
-           align-items: center;
-       }
-       
-       .notification-item {
-           display: inline-flex;
-           align-items: center;
-           margin-right: 50px;
-       }
-       
-       .notification-item i {
-           margin-right: 8px;
-       }
-       
-       @keyframes gradientSlide {
-           0% {background-position: 0% 50%}
-           100% {background-position: 200% 50%}
-       }
-       
-       @keyframes scrollText {
-           0% {transform: translateX(100vw);}
-           100% {transform: translateX(-150%);}
-       }
-       
-       /* Flashing effect */
-       .flash {
-           animation: flash 1.5s infinite;
-       }
-       
-       @keyframes flash {
-           0%, 100% { opacity: 1; }
-           50% { opacity: 0.7; }
-       }
    </style>
 </head>
 <body class="text-white antialiased">
-   <!-- Notification Bar -->
-   <div class="notification-bar">
-       <div class="notification-text">
-           <div class="notification-item">
-               <i class="fas fa-calendar-check flash text-white"></i>
-               <span>AI in CYBERSECURITY EVENT TOMORROW! April 29, 2025</span>
-           </div>
-           <div class="notification-item">
-               <i class="fas fa-bell flash text-white"></i>
-               <span>REGISTER NOW - Limited seats available!</span>
-           </div>
-           <div class="notification-item">
-               <i class="fas fa-user-tie text-white"></i>
-               <span>Meet industry expert Rashtra SHOURYA from Groww</span>
-           </div>
-           <div class="notification-item">
-               <i class="fas fa-graduation-cap text-white"></i>
-               <span>Learn cutting-edge AI cybersecurity techniques</span>
-           </div>
-           <div class="notification-item">
-               <i class="fas fa-laptop-code flash text-white"></i>
-               <span>REGISTER NOW for hands-on demonstrations!</span>
-           </div>
-       </div>
-   </div>
-
    <!-- 1. Header/Navigation -->
-   <nav class="fixed w-full z-50 bg-[#090909]/90 backdrop-blur-sm border-b border-white/5" style="top: 40px;">
+   <nav class="fixed w-full z-50 bg-[#090909]/90 backdrop-blur-sm border-b border-white/5" style="top: 0;">
        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
            <div class="flex items-center justify-between h-16">
                    <!-- Logo -->
@@ -2900,21 +2821,7 @@
                         });
                     }
                 });
-            });
-
-            // Adjust navigation for notification bar
-            const navBar = document.querySelector('nav');
-            const notificationBar = document.querySelector('.notification-bar');
-            
-            if (navBar && notificationBar) {
-                navBar.style.top = notificationBar.offsetHeight + 'px';
-            }
-            
-            // Set margin-top for the hero section to accommodate notification bar
-            const heroSection = document.querySelector('section');
-            if (heroSection && notificationBar) {
-                heroSection.style.marginTop = '40px';
-            }
+            });            // Navigation is already at the top, no need to adjust for notification bar
         });
     </script>
 </body>
